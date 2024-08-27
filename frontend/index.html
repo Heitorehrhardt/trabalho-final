@@ -13,27 +13,32 @@
             background-color: rgb(8, 158, 245);
 
 
+
         }
 
         .cartao,
         .logo {
             width: 18%;
-            border: 10px solid black;
+            border: 5px solid black;
             border-radius: 25px;
             padding: 20px;
             margin: 1%;
             font-size: 22px;
             flex-wrap: wrap;
+            justify-content: space-around;
         }
 
         .logo {
             position: absolute;
             top: 1;
+            margin: 1%;
+            border: 1px;
         }
 
         img {
             width: 100%;
             border-radius: 20px;
+            height: 60%;
 
         }
 
@@ -54,8 +59,9 @@
         .lista {
             margin: 3%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: flex-start;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         .button {
@@ -71,13 +77,14 @@
         }
 
         h1,
-        h2,
-        h3,
-        a
-
-         {
-            font-size: 40px;
+        h3 {
+            font-size: 60px;
             margin-top: 5%;
+        }
+
+        h4 {
+            font-size: 30px;
+
         }
     </style>
 </head>
@@ -89,13 +96,14 @@
 
 
 <body style="text-align: center;">
-    <h1> Pesca e mais++</h1>
-    <input size="30px"><h4>O que você procura?</h4 type="text">
+    <h1> Pescados e Utilitários</h1>
+    <input style="width: 300px; height: 35px;" id="busca">
+    <h4>O que você procura?</h4 type="text">
 
     <h3>Categorias:</h3>
-    <div class="lista">
+    <div class="lista" id="lista">
         <div class="cartao">
-            <p class="titulo">Varras de pesca</p>
+            <p class="titulo" id="titulo">Varas de pesca</p>
             <img
                 src="https://cdn.awsli.com.br/600x450/2493/2493680/produto/244416753/design-sem-nome-3--plx2wnk2tm.png">
             <div class="rodape">
@@ -103,7 +111,7 @@
             </div>
         </div>
         <div class="cartao">
-            <p class="titulo">Peixes</p>
+            <p class="titulo" id="titulo">Peixes</p>
             <img src="https://i.pinimg.com/736x/e1/40/32/e140322d6c060afcc91b2d5356c00e1b.jpg">
             <div class="rodape">
                 <a href="index1.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
@@ -111,7 +119,7 @@
         </div>
 
         <div class="cartao">
-            <p class="titulo">Camping</p>
+            <p class="titulo" id="titulo">Camping</p>
             <img src="https://blog.colombo.com.br/wp-content/uploads/2021/09/10-itens-para-acampamento.jpg">
             <div class="rodape">
                 <a href="index3.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
@@ -119,8 +127,45 @@
         </div>
 
         <div class="cartao">
-            <p class="titulo">Iscas e Armadilhas</p>
+            <p class="titulo" id="titulo">Iscas</p>
             <img src="https://m.media-amazon.com/images/I/6103xAfB6cL._AC_UF1000,1000_QL80_.jpg">
+            <div class="rodape">
+                <a href="pescaria.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
+            </div>
+
+        </div>
+
+        <div class="cartao">
+            <p class="titulo" id="titulo">Caiaques</p>
+            <img src="https://cdn.awsli.com.br/600x450/120/120099/produto/49638441/841f479ada.jpg">
+            <div class="rodape">
+                <a href="pescaria.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
+            </div>
+
+        </div>
+
+        <div class="cartao">
+            <p class="titulo" id="titulo">Armadilhas</p>
+            <img
+                src="https://www.nerdloja.com/cdn/shop/products/e2382fb4b44aab46180828b31ce17cd0_514x.jpg?v=1701045139">
+            <div class="rodape">
+                <a href="pescaria.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
+            </div>
+
+        </div>
+
+        <div class="cartao">
+            <p class="titulo" id="titulo">Ração</p>
+            <img src="https://http2.mlstatic.com/D_NQ_NP_685330-MLU72822965829_112023-O.webp">
+            <div class="rodape">
+                <a href="pescaria.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
+            </div>
+
+        </div>
+
+        <div class="cartao">
+            <p class="titulo" id="titulo">Equipamentos</p>
+            <img src="https://http2.mlstatic.com/D_NQ_NP_794343-CBT47751208634_102021-O.webp">
             <div class="rodape">
                 <a href="pescaria.html"><button class="button" style="font-size: 22px;">Ver mais detalhes</button></a>
             </div>
@@ -129,7 +174,29 @@
     </div>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const busca = document.getElementById('busca');
+            const lista = document.getElementById('lista');
+            const divs = lista.getElementsByTagName('div');
 
+            busca.addEventListener('keyup', function () {
+                const query = busca.value.toLowerCase();
+
+                for (let i = 0; i < divs.length; i++) {
+                    const pTitulo = divs[i].querySelector('p#titulo');
+                    if (pTitulo) {
+                        const titleText = pTitulo.textContent.toLowerCase();
+                        if (titleText.includes(query)) {
+                            divs[i].style.display = ''; // Mostra a div
+                        } else {
+                            divs[i].style.display = 'none'; // Oculta a div
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 
 
 
