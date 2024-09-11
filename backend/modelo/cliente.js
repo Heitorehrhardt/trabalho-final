@@ -18,6 +18,12 @@ Cliente.init({
     cpf: {
         type: DataTypes.STRING
     }
+    ,email: {
+        type: DataTypes.STRING
+    }
+    ,senha: {
+        type: DataTypes.STRING
+    }
 
 }, {
     sequelize,
