@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- saved from url=(0087)https://ava.sesisenai.org.br/pluginfile.php/1064482/mod_resource/content/1/request.html -->
+<html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pessoa</title>
+</head>
+
+<body>
+    <h1>Cadastro de Pessoa</h1>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" placeholder="Digite seu Email"><br><br>
+
+    <label for="senha">Senha:</label>
+    <input type="text" id="senha" placeholder="Digite sua senha"><br><br>
+
+    <label for="cpf">Cpf:</label>
+    <input type="text" id="cpf" placeholder="digite seu CPF"><br><br>
+
+    <button onclick="cadastrarPessoa()">Cadastrar</button>
+
+    <script>
+        function cadastrarPessoa() {
+            // Captura os valores dos inputs
+            const nome = document.getElementById('email').value;
+            const email = document.getElementById('senha').value;
+            const idade = document.getElementById('cpf').value;
+
+            // Cria o objeto com os dados
+            const pessoa = {
+                email: email,
+                senha: senha,
+                cpf: cpf, 
+            };
+
+            // Faz a solicitação POST para o backend
+            fetch('http://localhost:3000/pessoas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pessoa)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Erro ao cadastrar a pessoa');
+                })
+                .then(data => {
+                    console.log('Pessoa cadastrada com sucesso:', data);
+                    // Limpar os campos de entrada após o envio
+                    document.getElementById('nome').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('idade').value = '';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
+    </script>
+
+
+</body></html>
