@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -9,8 +8,8 @@
     <style>
         body {
 
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            background-color: rgb(8,158,245);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: rgb(8, 158, 245);
         }
 
         .cartao {
@@ -56,6 +55,7 @@
         .preco {
             font-weight: bold;
         }
+
         h1,
         h3 {
             font-size: 60px;
@@ -66,6 +66,7 @@
             font-size: 30px;
 
         }
+
         .logo {
             position: absolute;
             top: 1;
@@ -73,19 +74,21 @@
             border: 1px;
             width: 20%;
         }
-        button{
+
+        button {
             padding: 5px 10px;
         }
-
     </style>
 </head>
-<div width="40%" class="logo">
-    <img src="https://img.freepik.com/vetores-premium/logotipo-de-pesca_7085-196.jpg">
-</div>
-<h3 style="text-align: center;"> estoque </h3>
+
+<body>
+    <div width="40%" class="logo">
+        <img src="https://img.freepik.com/vetores-premium/logotipo-de-pesca_7085-196.jpg">
+    </div>
+    <h3 style="text-align: center;"> Estoque </h3>
     <h3 style="margin-top: 3%;">Camping</h3>
-    <div class="lista">
-        <div class="cartao">
+    <div class="lista" id="lista-produtos">
+        <!-- <div class="cartao">
             <img src="https://lojamor.vteximg.com.br/arquivos/ids/165707-1000-1000/009033-barraca-iglu-2p.jpg?v=636524957165930000">
             <p class=" titulo">barraca de dois lugares</p>
             <p class="descrito">
@@ -96,7 +99,7 @@
         </div>
         <div class="cartao">
             <img src="https://i.zst.com.br/thumbs/12/2e/d/6470541.jpg">
-            <p class=" titulo">cochão inflavel de cor azul</p>
+            <p class=" titulo">Cochão inflavel de cor azul</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 99,00</p>
@@ -115,7 +118,7 @@
         </div>
         <div class="cartao">
             <img src="https://img.lojadomecanico.com.br/IMAGENS/64/877/202120/1634908368820.JPG">
-            <p class=" titulo">pá 5 em 1 com serrote, abridor de latas, enchadas,pá de corte e faca</p>
+            <p class=" titulo">Pá 5 em 1 com serrote, abridor de latas, enchadas,pá de corte e faca</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 700,00</p>
@@ -124,7 +127,7 @@
         </div>
         <div class="cartao">
             <img src="https://http2.mlstatic.com/D_NQ_NP_930884-MLU71888164409_092023-O.webp">
-            <p class=" titulo">corda de 20 metros pra mais na cor verde escuro</p>
+            <p class=" titulo">Corda de 20 metros pra mais na cor verde escuro</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 20,00</p>
@@ -132,8 +135,9 @@
             </div>
         </div>
         <div class="cartao">
-            <img src="https://lojasbecker.vteximg.com.br/arquivos/ids/3151462-1000-1000/cadeira-dobravel-camping-bkr.jpg?v=638598438803300000">
-            <p class=" titulo">cadeira dobravel de pano</p>
+            <img
+                src="https://lojasbecker.vteximg.com.br/arquivos/ids/3151462-1000-1000/cadeira-dobravel-camping-bkr.jpg?v=638598438803300000">
+            <p class=" titulo">Cadeira dobravel de pano</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 60,00</p>
@@ -141,8 +145,9 @@
             </div>
         </div>
         <div class="cartao">
-            <img src="https://a-static.mlcdn.com.br/450x450/mochila-de-camping-trilha-caminhada-acampamento-75-litros-clio-style/brandz/52994-4/7b678a752d62fe7b0f2ec87b28e2ecd2.jpg">
-            <p class=" titulo">bolsa de camping</p>
+            <img
+                src="https://a-static.mlcdn.com.br/450x450/mochila-de-camping-trilha-caminhada-acampamento-75-litros-clio-style/brandz/52994-4/7b678a752d62fe7b0f2ec87b28e2ecd2.jpg">
+            <p class=" titulo">Bolsa de camping</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 279,99</p>
@@ -151,16 +156,47 @@
         </div>
         <div class="cartao">
             <img src="https://http2.mlstatic.com/D_NQ_NP_814626-MLU72542370888_112023-O.webp">
-            <p class=" titulo">quatro unidades de radio amador por</p>
+            <p class=" titulo">Quatro unidades de radio amador por</p>
             <p class="descrito">
             <div class="rodape">
                 <p class="preco">R$ 130,50</p>
                 <button>comprar</button>
             </div>
-        </div>
+        </div> -->
     </div>
 
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:3000/produtos')
+                .then(response => response.json())
+                .then(produtos => {
+                    const listaProdutos = document.getElementById('lista-produtos');
+                    for (i = 0; i < produtos.length; i++) {
+                        const produto = produtos[i]
+                        const cartaoProduto = document.createElement('div');
+                        cartaoProduto.className = 'cartao-produto';
+
+                        cartaoProduto.innerHTML = `
+                            <img src="${produto.imagem}">
+                            <p class=" titulo">${produto.nome}</p>
+                            <p class="descricao">${produto.descricao}</p>
+                            <div class="rodape">
+                                <p class="preco">R$ ${produto.preco}</p>
+                                <button>comprar</button>
+                            </div>
+                        `;
+
+                        listaProdutos.appendChild(cartaoProduto);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar produtos:', error);
+                });
+        });
+
+    </script>
+
+
 </body>
 
 </html>
