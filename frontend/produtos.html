@@ -26,6 +26,7 @@
             height: 60%;
             border-width: 20px;
             border-radius: 15px;
+            width: 300px;
         }
 
         .titulo {
@@ -86,7 +87,7 @@
         <img src="https://img.freepik.com/vetores-premium/logotipo-de-pesca_7085-196.jpg">
     </div>
     <h3 style="text-align: center;"> Estoque </h3>
-    <h3 style="margin-top: 3%;">Camping</h3>
+    <h3 style="margin-top: 3%;" id="titulo"></h3>
     <div class="lista" id="lista-produtos">
         <!-- <div class="cartao">
             <img src="https://lojamor.vteximg.com.br/arquivos/ids/165707-1000-1000/009033-barraca-iglu-2p.jpg?v=636524957165930000">
@@ -167,7 +168,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('http://localhost:3000/produtos')
+            
+            const url =new URL(window.location.href);
+            const params  = new URLSearchParams(url.search);
+            const categoria = params.get('categoria')
+
+            document.getElementById('titulo').innerText = categoria
+            fetch('http://localhost:3000/produtos/categoria/' + categoria)
                 .then(response => response.json())
                 .then(produtos => {
                     const listaProdutos = document.getElementById('lista-produtos');
@@ -176,17 +183,19 @@
                         const cartaoProduto = document.createElement('div');
                         cartaoProduto.className = 'cartao-produto';
 
+                        const PrecoFormatado = produto.preco === null ? gratis : `R$ ${parseFloat(produto.preco).toFixed(2)}`;
+
                         cartaoProduto.innerHTML = `
                             <img src="${produto.imagem}">
                             <p class=" titulo">${produto.nome}</p>
                             <p class="descricao">${produto.descricao}</p>
                             <div class="rodape">
-                                <p class="preco">R$ ${produto.preco}</p>
+                                <p class="preco">R$ ${PrecoFormatado}</p>
                                 <button>comprar</button>
                             </div>
                         `;
 
-                        listaProdutos.appendChild(cartaoProduto);
+                        listaProdutos.appendChild(cartaoProduto); 
                     }
                 })
                 .catch(error => {

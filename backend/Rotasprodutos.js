@@ -8,6 +8,9 @@ router.post('/produtos', ProdutoController.createProduto);
 // Rota para obter todos os produtos
 router.get('/produtos', ProdutoController.getAllProdutos);
 
+// Rota para obter todos os produtos
+router.get('/produtos/categoria/:categoria', ProdutoController.getProdutosByCategoria);
+
 // Rota para obter um produto pelo ID
 router.get('/produtos/:id', ProdutoController.getProdutoById);
 

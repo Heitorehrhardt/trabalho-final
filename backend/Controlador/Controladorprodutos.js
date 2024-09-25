@@ -8,11 +8,26 @@ const ProdutoController = {
         } catch (error) {
             res.status(500).send(error.message);
         }
-    },
-
+    },    
+    
     getAllProdutos: async (req, res) => {
         try {
             const produtos = await Produto.findAll();
+
+            res.json(produtos);
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    },
+
+    getProdutosByCategoria: async (req, res) => {
+        try {
+            const produtos = await Produto.findAll({
+                where: {
+                    categoria: req.params.categoria
+                }
+            });
+
             res.json(produtos);
         } catch (error) {
             res.status(500).send(error.message);
