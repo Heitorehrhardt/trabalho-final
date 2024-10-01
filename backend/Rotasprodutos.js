@@ -12,7 +12,7 @@ router.get('/produtos', ProdutoController.getAllProdutos);
 router.get('/produtos/categoria/:categoria', ProdutoController.getProdutosByCategoria);
 
 // Rota para obter um produto pelo ID
-router.get('/produtos/:id', ProdutoController.getProdutoById);
+router.get('/produtos/:nome', ProdutoController.getProdutoByNome);
 
 // Rota para atualizar um produto
 router.put('/produtos/:id', ProdutoController.updateProduto);

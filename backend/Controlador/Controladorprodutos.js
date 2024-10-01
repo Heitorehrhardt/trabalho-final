@@ -34,9 +34,13 @@ const ProdutoController = {
         }
     },
 
-    getProdutoById: async (req, res) => {
+    getProdutoByNome: async (req, res) => {
         try {
-            const produto = await Produto.findByPk(req.params.id);
+            const produto = await Produto.findOne({
+                where: {
+                    nome: req.params.nome
+                }
+            });
             if (!produto) {
                 return res.status(404).send('Produto não encontrado');
             }
