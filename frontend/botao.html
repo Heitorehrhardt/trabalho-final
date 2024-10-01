@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Comprar</title>
+
+
+    <style>
+        body {
+
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: rgb(8, 158, 245);
+        }
+
+        .cartao {
+            width: 15%;
+            border: 5px solid black;
+            border-radius: 15px;
+            margin-top: 30px;
+            margin: auto;
+        }
+
+        img {
+
+            width: 100%;
+            height: 40%;
+            border-width: 20px;
+            border-radius: 15px;
+        }
+
+        .titulo {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .descricao {
+            text-align: left;
+            font-weight: 14px;
+        }
+
+        .lista {
+            margin: 3%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20;
+        }
+
+        .rodape {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preco {
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 60px;
+            margin-top: 5%;
+        }
+
+        h4 {
+            font-size: 30px;
+
+        }
+
+        .logo {
+            position: absolute;
+            top: 1;
+            margin: 1%;
+            border: 1px;
+            width: 20%;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+
+        .div {
+            text-align: center;
+            width: 50%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div width="40%" class="logo">
+
+        <img src="https://img.freepik.com/vetores-premium/logotipo-de-pesca_7085-196.jpg">
+    </div>
+    <h3 style="text-align: center;">Comprar</h3>
+
+    <div id="produto">
+
+    </div>
+
+
+
+    <script>    
+    
+    
+        const nome = localStorage.getItem('produto')
+        fetch('http://localhost:3000/produtos/' + nome)
+            .then(resposta => resposta.json())
+            .then(produto => {
+                const produto_pagina = document.createElement('div')
+                produto_pagina.className = 'cartao'
+                
+                produto_pagina.innerHTML =`
+                <img src=${produto.imagem}>
+                <h1>${produto.nome}</h1>         
+                <button>Comprar</button> 
+                `
+                function clickBotao() {
+            alert('Você comprou,quando apareçer uma mensagem que sua entrega chegou, você deve ir até os correios da sua cidade e retirar a sua encomenda👍')
+        }   
+             
+
+                document.getElementById('produto').append(produto_pagina)
+            })
+            
+    </script>
+
+</body>
+
+</html>

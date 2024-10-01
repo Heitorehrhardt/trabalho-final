@@ -85,7 +85,10 @@
                     console.error('Erro ao buscar produtos:', error);
                 });
         });
-        
+        function pagina_produto(nome){
+            localStorage.setItem("produto",nome)
+            window.location.href="botao.html"
+        }
     </script>
 
 

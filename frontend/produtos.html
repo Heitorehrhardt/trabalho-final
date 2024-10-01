@@ -191,7 +191,7 @@
                             <p class="descricao">${produto.descricao}</p>
                             <div class="rodape">
                                 <p class="preco">R$ ${PrecoFormatado}</p>
-                                <button>comprar</button>
+                                <button onclick="comprar('${produto.nome}')">comprar</button></a>
                             </div>
                         `;
 
@@ -202,6 +202,11 @@
                     console.error('Erro ao buscar produtos:', error);
                 });
         });
+
+        function comprar(nome){
+            localStorage.setItem('produto', nome)
+            window.location.href = "botao.html"
+        }
 
     </script>
 
