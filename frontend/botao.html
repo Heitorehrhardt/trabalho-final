@@ -99,29 +99,29 @@
 
 
 
-    <script>    
-    
-    
+    <script>
+
+
         const nome = localStorage.getItem('produto')
         fetch('http://localhost:3000/produtos/' + nome)
             .then(resposta => resposta.json())
             .then(produto => {
                 const produto_pagina = document.createElement('div')
                 produto_pagina.className = 'cartao'
-                
-                produto_pagina.innerHTML =`
+
+                produto_pagina.innerHTML = `
                 <img src=${produto.imagem}>
                 <h1>${produto.nome}</h1>         
-                <button>Comprar</button> 
+                <button onclick="clickBotao()">Comprar</button> 
                 `
-                function clickBotao() {
-            alert('Você comprou,quando apareçer uma mensagem que sua entrega chegou, você deve ir até os correios da sua cidade e retirar a sua encomenda👍')
-        }   
-             
 
                 document.getElementById('produto').append(produto_pagina)
             })
-            
+
+        function clickBotao() {
+            alert('Você comprou,quando apareçer uma mensagem que sua entrega chegou, você deve ir até os correios da sua cidade e retirar a sua encomenda👍')
+        }
+
     </script>
 
 </body>
